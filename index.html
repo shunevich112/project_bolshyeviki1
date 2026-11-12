@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%233f6252'/%3E%3Crect x='7' y='11' width='18' height='3' rx='1.5' fill='%23e9f0ea'/%3E%3Crect x='7' y='17' width='12' height='3' rx='1.5' fill='%23a9c3b4'/%3E%3C/svg%3E">
+<title>Почвенная карта территории (Большевик)</title>
+<link rel="stylesheet" href="css/leaflet.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<header class="app-header">
+    <div class="brand">
+        <div class="brand-text">
+            <h1 id="app-title">Почвенная карта территории</h1>
+            <div class="subtitle" id="app-subtitle">Интерактивная карта почв</div>
+        </div>
+    </div>
+    <div class="header-tools">
+        <button id="btn-theme" title="Сменить тему">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button id="btn-home" title="Показать всю карту">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </button>
+        <button id="btn-fullscreen" title="На весь экран">
+            <svg class="icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            <svg class="icon-compress" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </button>
+    </div>
+</header>
+
+<div id="map">
+    <div id="left-panels">
+        <div class="custom-panel" id="soils-panel">
+            <div class="panel-header">
+                <span>Список почв <span class="badge" id="soilCount">0</span></span>
+                <button class="panel-toggle" aria-label="Свернуть">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+                </button>
+            </div>
+            <div class="panel-body">
+                <input type="search" id="soilSearch" class="search-input" placeholder="Поиск по названию…">
+                <div id="soilList" class="soil-list"></div>
+                <button id="btn-show-all" class="btn-reset-layers">Показать все контуры</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="custom-panel" id="control-panel">
+        <div class="panel-header">
+            <span>Управление картой</span>
+            <button class="panel-toggle" aria-label="Свернуть">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            </button>
+        </div>
+        <div class="panel-body">
+            <div class="control-title">Подложка</div>
+            <div class="select-wrapper">
+                <select id="basemapSelect"></select>
+                <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="control-title" style="margin-top:14px">Слои карты</div>
+            <div id="layerList" class="soil-list"></div>
+            <button id="btn-reset-layers" class="btn-reset-layers">Оставить только подложку и область</button>
+        </div>
+    </div>
+
+    <div id="scale-line"><span class="scale-bar" id="scaleBar"></span><span id="scaleText">—</span></div>
+</div>
+
+<footer class="app-footer">
+    <div><span>Координаты: </span><span id="coords">—</span></div>
+    <div id="footer-title">Почвенная карта территории</div>
+</footer>
+
+<script src="js/leaflet.js"></script>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
